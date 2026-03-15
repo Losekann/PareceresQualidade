@@ -1,166 +1,166 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pareceres de Inspeção – Meta</title>
+<link rel="icon" type="image/png" href="Meta-Logo-PNG-HD.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #f0f2f5;
+    --surface: #ffffff;
+    --surface2: #f7f8fa;
+    --border: #e0e4ea;
+    --text: #1a1a2e;
+    --text-dim: #6b7280;
+    --accent: #1a33cc;
+    --accent-hover: #1428aa;
+    --accent-light: #eef1fc;
+    --green: #16a34a;
+    --header-bg: #ffffff;
+    --shadow: 0 1px 4px rgba(0,0,0,.07);
+    --group-header-bg: #eef1fc;
+    --group-header-text: #1a33cc;
+  }
+
+  [data-theme="dark"] {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3347;
+    --text: #e8eaf6;
+    --text-dim: #8b92b3;
+    --accent: #4d6bff;
+    --accent-hover: #3a56f0;
+    --accent-light: #1e2540;
+    --green: #22c55e;
+    --header-bg: #13151f;
+    --shadow: 0 1px 6px rgba(0,0,0,.3);
+    --group-header-bg: #1e2540;
+    --group-header-text: #7c9bff;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'Inter', sans-serif;
-    background: #f0f2f5;
-    color: #1a1a2e;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
+    transition: background .3s, color .3s;
   }
 
-  /* HEADER */
   header {
-    background: #fff;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 14px 32px;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 200;
-    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    box-shadow: var(--shadow);
+    transition: background .3s, border-color .3s;
   }
 
-  header img { height: 38px; object-fit: contain; }
+  header img { height: 36px; object-fit: contain; }
 
-  .header-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #1a1a2e;
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .header-title-wrap { text-align: right; }
+  .header-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .header-sub { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+
+  .theme-btn {
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
   }
 
-  .header-sub {
-    font-size: 12px;
-    color: #888;
-    margin-top: 1px;
-    text-align: right;
-  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* MAIN */
-  main {
-    max-width: 860px;
-    margin: 36px auto;
-    padding: 0 20px;
-  }
+  main { max-width: 900px; margin: 32px auto; padding: 0 20px; }
 
-  h2 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 6px;
-  }
+  .page-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .page-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
 
-  .subtitle {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 24px;
-  }
+  .search-wrap { position: relative; margin-bottom: 16px; }
 
-  /* SEARCH */
-  .search-wrap {
-    position: relative;
-    margin-bottom: 20px;
-  }
-
-  .search-wrap svg {
-    position: absolute;
-    left: 14px;
-    top: 50%;
+  .search-icon {
+    position: absolute; left: 14px; top: 50%;
     transform: translateY(-50%);
-    color: #aaa;
-    pointer-events: none;
+    color: var(--text-dim); pointer-events: none;
   }
 
   #search {
     width: 100%;
     padding: 13px 42px 13px 44px;
-    border: 1.5px solid #d0d0d0;
+    border: 1.5px solid var(--border);
     border-radius: 10px;
     font-size: 15px;
     font-family: 'Inter', sans-serif;
-    background: #fff;
+    background: var(--surface);
+    color: var(--text);
     outline: none;
-    transition: border-color .2s, box-shadow .2s;
-    color: #1a1a2e;
+    transition: border-color .2s, box-shadow .2s, background .3s;
   }
 
   #search:focus {
-    border-color: #1a33cc;
+    border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(26,51,204,.1);
   }
 
-  #search::placeholder { color: #aaa; }
+  #search::placeholder { color: var(--text-dim); }
 
   #clear-btn {
-    position: absolute;
-    right: 14px;
-    top: 50%;
+    position: absolute; right: 14px; top: 50%;
     transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #aaa;
-    font-size: 18px;
-    display: none;
-    line-height: 1;
-    padding: 0;
+    background: none; border: none; cursor: pointer;
+    color: var(--text-dim); font-size: 16px; display: none; padding: 0; line-height: 1;
   }
 
-  #clear-btn:hover { color: #1a33cc; }
+  #clear-btn:hover { color: var(--accent); }
 
-  /* FILTROS */
-  .filters {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-  }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
 
   .filter-btn {
-    background: #fff;
-    border: 1.5px solid #d0d0d0;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
     border-radius: 20px;
     padding: 5px 14px;
     font-size: 12px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    color: #555;
+    color: var(--text-dim);
     cursor: pointer;
     transition: all .15s;
   }
 
-  .filter-btn:hover { border-color: #1a33cc; color: #1a33cc; }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-  .filter-btn.active {
-    background: #1a33cc;
-    border-color: #1a33cc;
-    color: #fff;
-  }
+  .results-info { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; }
+  .results-info strong { color: var(--text); }
 
-  /* RESULTS INFO */
-  .results-info {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 16px;
-  }
-
-  .results-info strong { color: #1a1a2e; }
-
-  /* GRUPO */
   .group {
-    background: #fff;
+    background: var(--surface);
     border-radius: 12px;
-    border: 1px solid #e0e0e0;
-    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    margin-bottom: 14px;
     overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: background .3s, border-color .3s;
   }
 
   .group-header {
@@ -168,176 +168,140 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 20px;
-    background: #f7f8fa;
-    border-bottom: 1px solid #e8e8e8;
+    background: var(--group-header-bg);
+    border-bottom: 1px solid var(--border);
     cursor: pointer;
     user-select: none;
     transition: background .15s;
   }
 
-  .group-header:hover { background: #eff1f8; }
+  .group-header:hover { filter: brightness(.97); }
 
-  .group-name {
-    font-size: 14px;
+  .group-left { display: flex; align-items: center; gap: 10px; }
+
+  .group-icon {
+    width: 30px; height: 30px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 11px;
     font-weight: 700;
-    color: #1a33cc;
-    letter-spacing: .3px;
-    text-transform: uppercase;
+    flex-shrink: 0;
   }
+
+  .group-name { font-size: 14px; font-weight: 700; color: var(--group-header-text); }
+  .group-right { display: flex; align-items: center; gap: 10px; }
 
   .group-count {
-    font-size: 12px;
-    color: #999;
-    font-weight: 500;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
   }
 
-  .group-arrow {
-    color: #aaa;
-    font-size: 12px;
-    transition: transform .2s;
-  }
-
+  .group-arrow { color: var(--text-dim); font-size: 11px; transition: transform .2s; }
   .group.collapsed .group-arrow { transform: rotate(-90deg); }
   .group.collapsed .group-body { display: none; }
 
-  /* ITEM */
   .item {
-    border-bottom: 1px solid #f0f0f0;
-    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
     transition: background .15s;
+    gap: 16px;
   }
 
   .item:last-child { border-bottom: none; }
-  .item:hover { background: #fafbff; }
+  .item:hover { background: var(--surface2); }
 
-  .item-key {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin-bottom: 4px;
-  }
+  .item-info { flex: 1; min-width: 0; }
 
-  .item-situacao {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 12px;
-    line-height: 1.5;
-  }
+  .item-key { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .item-sit { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
 
-  .item-situacao:empty { display: none; }
-
-  /* COMPLEMENTO */
-  .complemento-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    margin-bottom: 5px;
-  }
-
-  .complemento-textarea {
-    width: 100%;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 7px;
-    padding: 8px 12px;
-    font-size: 13px;
-    font-family: 'Inter', sans-serif;
-    color: #1a1a2e;
-    resize: vertical;
-    min-height: 60px;
-    outline: none;
-    background: #fafafa;
-    transition: border-color .2s;
-  }
-
-  .complemento-textarea:focus {
-    border-color: #1a33cc;
-    background: #fff;
-  }
-
-  .complemento-textarea::placeholder { color: #bbb; }
-
-  /* COPY BTN */
   .copy-btn {
-    margin-top: 10px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #1a33cc;
+    background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: 7px;
-    padding: 7px 16px;
+    border-radius: 8px;
+    padding: 8px 16px;
     font-size: 13px;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
     transition: background .15s, transform .1s;
   }
 
-  .copy-btn:hover { background: #1428aa; }
-  .copy-btn:active { transform: scale(.97); }
+  .copy-btn:hover { background: var(--accent-hover); }
+  .copy-btn:active { transform: scale(.96); }
+  .copy-btn.copied { background: var(--green); }
 
-  .copy-btn.copied {
-    background: #16a34a;
-  }
+  .empty { text-align: center; padding: 60px 20px; color: var(--text-dim); }
 
-  /* EMPTY */
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: #aaa;
-  }
-
-  .empty svg { margin-bottom: 12px; color: #d0d0d0; }
-  .empty p { font-size: 15px; }
-
-  mark {
-    background: #fff3b0;
-    border-radius: 3px;
-    padding: 0 2px;
-  }
+  mark { background: #fff3b0; border-radius: 3px; padding: 0 2px; color: #1a1a2e; }
+  [data-theme="dark"] mark { background: #4a3f00; color: #ffe066; }
 </style>
 </head>
 <body>
 
 <header>
   <img src="Meta-Logo-PNG-HD2.png" alt="Meta Logo">
-  <div style="text-align:right">
-    <div class="header-title">Pareceres de Inspeção</div>
-    <div class="header-sub">Sistema interno de consulta</div>
+  <div class="header-right">
+    <div class="header-title-wrap">
+      <div class="header-title">Pareceres de Inspeção</div>
+      <div class="header-sub">Sistema interno de consulta</div>
+    </div>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">
+      <span id="theme-icon">🌙</span>
+      <span id="theme-label">Escuro</span>
+    </button>
   </div>
 </header>
 
 <main>
-  <h2>Pesquisa de Pareceres</h2>
-  <p class="subtitle">Busque pelo tipo de erro, copie o parecer e cole na planilha de inspeções.</p>
+  <div class="page-title">Pesquisa de Pareceres</div>
+  <div class="page-sub">Busque pelo tipo de erro e copie a chave do parecer com um clique.</div>
 
   <div class="search-wrap">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="search" placeholder="Pesquisar pareceres por tipo ou descrição..." autocomplete="off">
+    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Pesquisar por chave, segmento ou situação..." autocomplete="off">
     <button id="clear-btn" title="Limpar">✕</button>
   </div>
 
   <div class="filters" id="filters"></div>
-
   <div class="results-info" id="results-info"></div>
-
   <div id="list"></div>
 </main>
 
 <script>
 const DATA = [
-  // ENDEREÇO
+  { seg: "TODOS", key: "Documento fora do prazo", sit: "" },
+  { seg: "TODOS", key: "Documento inválido", sit: "" },
+  { seg: "TODOS", key: "Documento ilegível", sit: "" },
+  { seg: "TODOS", key: "Cancelamento", sit: "" },
+  { seg: "TODOS", key: "Procedimento", sit: "" },
+  { seg: "TODOS", key: "Assinaturas", sit: "" },
+  { seg: "TODOS", key: "Chaves documentais", sit: "" },
+  { seg: "TODOS", key: "Documento válido", sit: "" },
+  { seg: "TODOS", key: "Falta de documento comprobatório", sit: "" },
+  { seg: "TODOS", key: "Parecer inválido", sit: "" },
   { seg: "ENDEREÇO", key: "Emissão endereço", sit: "Endereço fora/dentro do prazo" },
   { seg: "ENDEREÇO", key: "Vínculo", sit: "Sem encontrar vínculo" },
   { seg: "ENDEREÇO", key: "Logradouro", sit: "" },
   { seg: "ENDEREÇO", key: "Bairro", sit: "Não precisa validar bairro" },
   { seg: "ENDEREÇO", key: "Tipo de endereço", sit: "" },
   { seg: "ENDEREÇO", key: "N° do endereço", sit: "" },
-
-  // BEM NOVO
   { seg: "BEM NOVO", key: "Bem em garantia", sit: "Situação que solicita ajuste no valor do bem mas o mesmo está em garantia" },
   { seg: "BEM NOVO", key: "Valor do bem", sit: "Valor do bem divergente, errado etc" },
   { seg: "BEM NOVO", key: "Valor de avaliação", sit: "Valor divergente, etc" },
@@ -350,14 +314,10 @@ const DATA = [
   { seg: "BEM NOVO", key: "Exclusão do bem", sit: "Quando a % está zerada" },
   { seg: "BEM NOVO", key: "Consulta detran", sit: "Consulta extraída do site do Detran/Senatran" },
   { seg: "BEM NOVO", key: "CRLV", sit: "Vencido, inválido" },
-
-  // PRODUTOR
   { seg: "PRODUTOR", key: "Pequeno produtor", sit: "Situações em que consta o caf ou o cálculo da renda" },
   { seg: "PRODUTOR", key: "Médio produtor", sit: "Valor no enquadramento" },
   { seg: "PRODUTOR", key: "Grande produtor", sit: "Excedeu 20%, valor no enquadramento" },
   { seg: "PRODUTOR", key: "Inscrição do produtor", sit: "N° de inscrição" },
-
-  // FONTE RENDA
   { seg: "FONTE RENDA", key: "Renda NFE", sit: "Divisão errada da nfe/nfe fora do prazo no calculo" },
   { seg: "FONTE RENDA", key: "Renda IRPF", sit: "Rendas provenientes do IRPF, somadas erradas ou reprovadas erradas" },
   { seg: "FONTE RENDA", key: "Recibo IRPF", sit: "Recibo de entrega do IR" },
@@ -382,8 +342,6 @@ const DATA = [
   { seg: "FONTE RENDA", key: "SIMEI", sit: "" },
   { seg: "FONTE RENDA", key: "Cálculo SIMEI", sit: "" },
   { seg: "FONTE RENDA", key: "Tipo de renda PJ", sit: "" },
-
-  // PESSOA
   { seg: "PESSOA", key: "Naturalidade", sit: "" },
   { seg: "PESSOA", key: "N° do documento", sit: "" },
   { seg: "PESSOA", key: "Documento de identificação", sit: "" },
@@ -402,94 +360,66 @@ const DATA = [
   { seg: "PESSOA", key: "Data de registro", sit: "" },
   { seg: "PESSOA", key: "N° última alteração", sit: "" },
   { seg: "PESSOA", key: "N° de representação", sit: "" },
-
-  // RELACIONAMENTO
   { seg: "RELACIONAMENTO", key: "Tipo de relacionamento", sit: "" },
   { seg: "RELACIONAMENTO", key: "Percentual do capital", sit: "" },
   { seg: "RELACIONAMENTO", key: "Data de início", sit: "" },
   { seg: "RELACIONAMENTO", key: "Data fim", sit: "" },
-
-  // CERTIDÃO
   { seg: "CERTIDÃO", key: "Tipo de certidão", sit: "" },
   { seg: "CERTIDÃO", key: "Data de emissão", sit: "" },
   { seg: "CERTIDÃO", key: "N° da certidão", sit: "" },
-
-  // TODOS
-  { seg: "TODOS", key: "Documento fora do prazo", sit: "" },
-  { seg: "TODOS", key: "Documento inválido", sit: "" },
-  { seg: "TODOS", key: "Documento ilegível", sit: "" },
-  { seg: "TODOS", key: "Cancelamento", sit: "" },
-  { seg: "TODOS", key: "Procedimento", sit: "" },
-  { seg: "TODOS", key: "Assinaturas", sit: "" },
-  { seg: "TODOS", key: "Chaves documentais", sit: "" },
-  { seg: "TODOS", key: "Documento válido", sit: "" },
-  { seg: "TODOS", key: "Falta de documento comprobatório", sit: "" },
-  { seg: "TODOS", key: "Parecer inválido", sit: "" },
 ];
 
-const SEGMENTS = [...new Set(DATA.map(d => d.seg))];
+const SEGMENT_ORDER = ["TODOS","ENDEREÇO","BEM NOVO","PRODUTOR","FONTE RENDA","PESSOA","RELACIONAMENTO","CERTIDÃO"];
+const SEGMENT_ICONS = {
+  "TODOS":"T","ENDEREÇO":"EN","BEM NOVO":"BN","PRODUTOR":"PR",
+  "FONTE RENDA":"FR","PESSOA":"PS","RELACIONAMENTO":"RE","CERTIDÃO":"CE"
+};
+
 let activeFilter = "TODOS_SEGS";
 let searchTerm = "";
 
-// Build filters
+// Filters
 const filtersEl = document.getElementById("filters");
-const allBtn = document.createElement("button");
-allBtn.className = "filter-btn active";
-allBtn.textContent = "Todos";
-allBtn.dataset.seg = "TODOS_SEGS";
-allBtn.onclick = () => setFilter("TODOS_SEGS");
-filtersEl.appendChild(allBtn);
-
-SEGMENTS.forEach(seg => {
+[{label:"Todos os segmentos", val:"TODOS_SEGS"}, ...SEGMENT_ORDER.map(s=>({label:s,val:s}))].forEach(f => {
   const btn = document.createElement("button");
-  btn.className = "filter-btn";
-  btn.textContent = seg;
-  btn.dataset.seg = seg;
-  btn.onclick = () => setFilter(seg);
+  btn.className = "filter-btn" + (f.val==="TODOS_SEGS"?" active":"");
+  btn.textContent = f.label;
+  btn.dataset.val = f.val;
+  btn.onclick = () => {
+    activeFilter = f.val;
+    document.querySelectorAll(".filter-btn").forEach(b=>b.classList.toggle("active", b.dataset.val===f.val));
+    render();
+  };
   filtersEl.appendChild(btn);
 });
-
-function setFilter(seg) {
-  activeFilter = seg;
-  document.querySelectorAll(".filter-btn").forEach(b => {
-    b.classList.toggle("active", b.dataset.seg === seg);
-  });
-  render();
-}
 
 // Search
 const searchEl = document.getElementById("search");
 const clearBtn = document.getElementById("clear-btn");
-
 searchEl.addEventListener("input", () => {
   searchTerm = searchEl.value.trim().toLowerCase();
   clearBtn.style.display = searchTerm ? "block" : "none";
   render();
 });
-
 clearBtn.addEventListener("click", () => {
-  searchEl.value = "";
-  searchTerm = "";
-  clearBtn.style.display = "none";
+  searchEl.value=""; searchTerm="";
+  clearBtn.style.display="none";
   render();
 });
 
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function highlight(text, term) {
-  if (!term) return escHtml(text);
-  const re = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
-  return escHtml(text).replace(re, "<mark>$1</mark>");
-}
-
-function escHtml(str) {
-  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  if (!term) return esc(text);
+  const re = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,"gi");
+  return esc(text).replace(re,"<mark>$1</mark>");
 }
 
 function render() {
   const listEl = document.getElementById("list");
   const infoEl = document.getElementById("results-info");
 
-  let filtered = DATA.filter(d => {
-    const matchSeg = activeFilter === "TODOS_SEGS" || d.seg === activeFilter;
+  const filtered = DATA.filter(d => {
+    const matchSeg = activeFilter==="TODOS_SEGS" || d.seg===activeFilter;
     const matchSearch = !searchTerm ||
       d.key.toLowerCase().includes(searchTerm) ||
       d.seg.toLowerCase().includes(searchTerm) ||
@@ -497,80 +427,74 @@ function render() {
     return matchSeg && matchSearch;
   });
 
-  infoEl.innerHTML = `<strong>${filtered.length}</strong> parecer${filtered.length !== 1 ? "es" : ""} encontrado${filtered.length !== 1 ? "s" : ""}`;
+  infoEl.innerHTML = `<strong>${filtered.length}</strong> parecer${filtered.length!==1?"es":""} encontrado${filtered.length!==1?"s":""}`;
 
-  if (filtered.length === 0) {
-    listEl.innerHTML = `
-      <div class="empty">
-        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <p>Nenhum parecer encontrado para "<strong>${escHtml(searchEl.value)}</strong>"</p>
-      </div>`;
+  if (!filtered.length) {
+    listEl.innerHTML = `<div class="empty"><p>Nenhum parecer encontrado para "<strong>${esc(searchEl.value)}</strong>"</p></div>`;
     return;
   }
 
-  // Group by segment
   const groups = {};
-  filtered.forEach(d => {
-    if (!groups[d.seg]) groups[d.seg] = [];
-    groups[d.seg].push(d);
-  });
+  SEGMENT_ORDER.forEach(s => groups[s]=[]);
+  filtered.forEach(d => groups[d.seg].push(d));
 
   listEl.innerHTML = "";
-  Object.entries(groups).forEach(([seg, items]) => {
-    const groupEl = document.createElement("div");
-    groupEl.className = "group";
-
-    const header = document.createElement("div");
-    header.className = "group-header";
-    header.innerHTML = `
-      <span class="group-name">${escHtml(seg)}</span>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="group-count">${items.length} item${items.length !== 1 ? "s" : ""}</span>
-        <span class="group-arrow">▼</span>
+  SEGMENT_ORDER.forEach(seg => {
+    const items = groups[seg];
+    if (!items.length) return;
+    const g = document.createElement("div");
+    g.className = "group";
+    g.innerHTML = `
+      <div class="group-header" onclick="this.parentElement.classList.toggle('collapsed')">
+        <div class="group-left">
+          <div class="group-icon">${SEGMENT_ICONS[seg]||seg[0]}</div>
+          <span class="group-name">${esc(seg)}</span>
+        </div>
+        <div class="group-right">
+          <span class="group-count">${items.length}</span>
+          <span class="group-arrow">▼</span>
+        </div>
+      </div>
+      <div class="group-body">
+        ${items.map(d=>`
+          <div class="item">
+            <div class="item-info">
+              <div class="item-key">${highlight(d.key, searchTerm)}</div>
+              ${d.sit?`<div class="item-sit">${highlight(d.sit, searchTerm)}</div>`:""}
+            </div>
+            <button class="copy-btn" data-key="${esc(d.key)}" onclick="copyParecer(this)">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar
+            </button>
+          </div>`).join("")}
       </div>`;
-    header.onclick = () => groupEl.classList.toggle("collapsed");
-    groupEl.appendChild(header);
-
-    const body = document.createElement("div");
-    body.className = "group-body";
-
-    items.forEach((d, idx) => {
-      const itemEl = document.createElement("div");
-      itemEl.className = "item";
-      const uid = `${seg}-${idx}`.replace(/\s/g,"-");
-
-      itemEl.innerHTML = `
-        <div class="item-key">${highlight(d.key, searchTerm)}</div>
-        ${d.sit ? `<div class="item-situacao">${highlight(d.sit, searchTerm)}</div>` : ""}
-        <div class="complemento-label">Complemento / Observação</div>
-        <textarea class="complemento-textarea" id="comp-${uid}" placeholder="Digite aqui a explicação específica do caso..."></textarea>
-        <button class="copy-btn" onclick="copyParecer('${uid}', '${escHtml(d.key).replace(/'/g,"\\'")}', '${escHtml(d.sit).replace(/'/g,"\\'")}')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copiar Parecer
-        </button>`;
-      body.appendChild(itemEl);
-    });
-
-    groupEl.appendChild(body);
-    listEl.appendChild(groupEl);
+    listEl.appendChild(g);
   });
 }
 
-function copyParecer(uid, key, sit) {
-  const comp = document.getElementById(`comp-${uid}`).value.trim();
-  let texto = key;
-  if (sit) texto += `: ${sit}`;
-  if (comp) texto += `\n${comp}`;
-
-  navigator.clipboard.writeText(texto).then(() => {
-    const btn = event.currentTarget;
+function copyParecer(btn) {
+  navigator.clipboard.writeText(btn.dataset.key + ":").then(() => {
     btn.classList.add("copied");
-    btn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
+    btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
     setTimeout(() => {
       btn.classList.remove("copied");
-      btn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar Parecer`;
+      btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar`;
     }, 2000);
   });
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute("data-theme")==="dark";
+  document.documentElement.setAttribute("data-theme", isDark?"light":"dark");
+  document.getElementById("theme-icon").textContent = isDark?"🌙":"☀️";
+  document.getElementById("theme-label").textContent = isDark?"Escuro":"Claro";
+  localStorage.setItem("theme", isDark?"light":"dark");
+}
+
+if (localStorage.getItem("theme")==="dark") {
+  document.documentElement.setAttribute("data-theme","dark");
+  document.getElementById("theme-icon").textContent="☀️";
+  document.getElementById("theme-label").textContent="Claro";
 }
 
 render();
