@@ -16,7 +16,6 @@
     --text-dim: #6b7280;
     --accent: #1a33cc;
     --accent-hover: #1428aa;
-    --accent-light: #eef1fc;
     --green: #16a34a;
     --header-bg: #ffffff;
     --shadow: 0 1px 4px rgba(0,0,0,.07);
@@ -33,7 +32,6 @@
     --text-dim: #8b92b3;
     --accent: #4d6bff;
     --accent-hover: #3a56f0;
-    --accent-light: #1e2540;
     --green: #22c55e;
     --header-bg: #13151f;
     --shadow: 0 1px 6px rgba(0,0,0,.3);
@@ -66,7 +64,6 @@
   }
 
   header img { height: 36px; object-fit: contain; }
-
   .header-right { display: flex; align-items: center; gap: 16px; }
   .header-title-wrap { text-align: right; }
   .header-title { font-size: 14px; font-weight: 600; color: var(--text); }
@@ -87,22 +84,18 @@
     font-family: 'Inter', sans-serif;
     font-weight: 500;
   }
-
   .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   main { max-width: 900px; margin: 32px auto; padding: 0 20px; }
-
   .page-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
   .page-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
 
   .search-wrap { position: relative; margin-bottom: 16px; }
-
   .search-icon {
     position: absolute; left: 14px; top: 50%;
     transform: translateY(-50%);
     color: var(--text-dim); pointer-events: none;
   }
-
   #search {
     width: 100%;
     padding: 13px 42px 13px 44px;
@@ -115,25 +108,17 @@
     outline: none;
     transition: border-color .2s, box-shadow .2s, background .3s;
   }
-
-  #search:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(26,51,204,.1);
-  }
-
+  #search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,51,204,.1); }
   #search::placeholder { color: var(--text-dim); }
-
   #clear-btn {
     position: absolute; right: 14px; top: 50%;
     transform: translateY(-50%);
     background: none; border: none; cursor: pointer;
     color: var(--text-dim); font-size: 16px; display: none; padding: 0; line-height: 1;
   }
-
   #clear-btn:hover { color: var(--accent); }
 
   .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-
   .filter-btn {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -146,13 +131,13 @@
     cursor: pointer;
     transition: all .15s;
   }
-
   .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
   .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   .results-info { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; }
   .results-info strong { color: var(--text); }
 
+  /* GROUP */
   .group {
     background: var(--surface);
     border-radius: 12px;
@@ -169,14 +154,17 @@
     justify-content: space-between;
     padding: 14px 20px;
     background: var(--group-header-bg);
-    border-bottom: 1px solid var(--border);
     cursor: pointer;
     user-select: none;
     transition: background .15s;
+    border-bottom: 1px solid transparent;
+  }
+
+  .group:not(.collapsed) .group-header {
+    border-bottom-color: var(--border);
   }
 
   .group-header:hover { filter: brightness(.97); }
-
   .group-left { display: flex; align-items: center; gap: 10px; }
 
   .group-icon {
@@ -192,7 +180,6 @@
 
   .group-name { font-size: 14px; font-weight: 700; color: var(--group-header-text); }
   .group-right { display: flex; align-items: center; gap: 10px; }
-
   .group-count {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -202,11 +189,16 @@
     font-weight: 600;
     color: var(--text-dim);
   }
+  .group-arrow { color: var(--text-dim); font-size: 11px; transition: transform .25s; }
 
-  .group-arrow { color: var(--text-dim); font-size: 11px; transition: transform .2s; }
-  .group.collapsed .group-arrow { transform: rotate(-90deg); }
-  .group.collapsed .group-body { display: none; }
+  /* COLLAPSED by default */
+  .group-body { display: none; }
+  .group-arrow { transform: rotate(-90deg); }
 
+  .group.open .group-body { display: block; }
+  .group.open .group-arrow { transform: rotate(0deg); }
+
+  /* ITEM */
   .item {
     display: flex;
     align-items: center;
@@ -216,12 +208,9 @@
     transition: background .15s;
     gap: 16px;
   }
-
   .item:last-child { border-bottom: none; }
   .item:hover { background: var(--surface2); }
-
   .item-info { flex: 1; min-width: 0; }
-
   .item-key { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
   .item-sit { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
 
@@ -242,7 +231,6 @@
     flex-shrink: 0;
     transition: background .15s, transform .1s;
   }
-
   .copy-btn:hover { background: var(--accent-hover); }
   .copy-btn:active { transform: scale(.96); }
   .copy-btn.copied { background: var(--green); }
@@ -286,22 +274,27 @@
 
 <script>
 const DATA = [
+  // TODOS
   { seg: "TODOS", key: "Documento fora do prazo", sit: "" },
-  { seg: "TODOS", key: "Documento inválido", sit: "" },
+  { seg: "TODOS", key: "Documento inválido", sit: "Não aceito, documento cortado, ilegível, captura de tela, sem registro..." },
   { seg: "TODOS", key: "Documento ilegível", sit: "" },
-  { seg: "TODOS", key: "Cancelamento", sit: "" },
-  { seg: "TODOS", key: "Procedimento", sit: "" },
+  { seg: "TODOS", key: "Cancelamento", sit: "Quando a cooperativa solicita o cancelamento, mas é devolvido para ajuste." },
+  { seg: "TODOS", key: "Procedimento", sit: "Aprovação de fluxo com justificativa de devolução. / Reprovações da 0300." },
   { seg: "TODOS", key: "Assinaturas", sit: "" },
   { seg: "TODOS", key: "Chaves documentais", sit: "" },
   { seg: "TODOS", key: "Documento válido", sit: "" },
   { seg: "TODOS", key: "Falta de documento comprobatório", sit: "" },
-  { seg: "TODOS", key: "Parecer inválido", sit: "" },
+  { seg: "TODOS", key: "Parecer inválido", sit: "Quando é utilizado o parecer de outro fluxo em um fluxo incorreto, ex: Era fluxo de endereço, e foi usado parecer de Fonte de renda / Devolução incompleta" },
+
+  // ENDEREÇO
   { seg: "ENDEREÇO", key: "Emissão endereço", sit: "Endereço fora/dentro do prazo" },
   { seg: "ENDEREÇO", key: "Vínculo", sit: "Sem encontrar vínculo" },
   { seg: "ENDEREÇO", key: "Logradouro", sit: "" },
   { seg: "ENDEREÇO", key: "Bairro", sit: "Não precisa validar bairro" },
   { seg: "ENDEREÇO", key: "Tipo de endereço", sit: "" },
   { seg: "ENDEREÇO", key: "N° do endereço", sit: "" },
+
+  // BEM NOVO
   { seg: "BEM NOVO", key: "Bem em garantia", sit: "Situação que solicita ajuste no valor do bem mas o mesmo está em garantia" },
   { seg: "BEM NOVO", key: "Valor do bem", sit: "Valor do bem divergente, errado etc" },
   { seg: "BEM NOVO", key: "Valor de avaliação", sit: "Valor divergente, etc" },
@@ -314,10 +307,14 @@ const DATA = [
   { seg: "BEM NOVO", key: "Exclusão do bem", sit: "Quando a % está zerada" },
   { seg: "BEM NOVO", key: "Consulta detran", sit: "Consulta extraída do site do Detran/Senatran" },
   { seg: "BEM NOVO", key: "CRLV", sit: "Vencido, inválido" },
+
+  // PRODUTOR
   { seg: "PRODUTOR", key: "Pequeno produtor", sit: "Situações em que consta o caf ou o cálculo da renda" },
   { seg: "PRODUTOR", key: "Médio produtor", sit: "Valor no enquadramento" },
   { seg: "PRODUTOR", key: "Grande produtor", sit: "Excedeu 20%, valor no enquadramento" },
   { seg: "PRODUTOR", key: "Inscrição do produtor", sit: "N° de inscrição" },
+
+  // FONTE RENDA
   { seg: "FONTE RENDA", key: "Renda NFE", sit: "Divisão errada da nfe/nfe fora do prazo no calculo" },
   { seg: "FONTE RENDA", key: "Renda IRPF", sit: "Rendas provenientes do IRPF, somadas erradas ou reprovadas erradas" },
   { seg: "FONTE RENDA", key: "Recibo IRPF", sit: "Recibo de entrega do IR" },
@@ -326,47 +323,53 @@ const DATA = [
   { seg: "FONTE RENDA", key: "Renda aposentadoria", sit: "Valor divergente, documento inválido" },
   { seg: "FONTE RENDA", key: "Renda contrato", sit: "Contrato de trabalho, prestação de serviço" },
   { seg: "FONTE RENDA", key: "Renda pro labore", sit: "Valor divergente, documento inválido" },
-  { seg: "FONTE RENDA", key: "Renda Decore", sit: "" },
-  { seg: "FONTE RENDA", key: "Renda DEFIS", sit: "" },
-  { seg: "FONTE RENDA", key: "Renda agropecuária", sit: "" },
+  { seg: "FONTE RENDA", key: "Renda Decore", sit: "Valor divergente, documento inválido" },
+  { seg: "FONTE RENDA", key: "Renda DEFIS", sit: "Valor divergente, documento inválido" },
+  { seg: "FONTE RENDA", key: "Renda agropecuária", sit: "Documento inválido, faltando informações de ano/safra, imóvel de exploração" },
   { seg: "FONTE RENDA", key: "Divisão familiar", sit: "" },
   { seg: "FONTE RENDA", key: "Tipo de renda PF", sit: "" },
   { seg: "FONTE RENDA", key: "Cálculo do simples", sit: "" },
-  { seg: "FONTE RENDA", key: "Documento do simples", sit: "" },
-  { seg: "FONTE RENDA", key: "Consulta simples", sit: "" },
-  { seg: "FONTE RENDA", key: "Recibo simples", sit: "" },
-  { seg: "FONTE RENDA", key: "Flag simples", sit: "" },
-  { seg: "FONTE RENDA", key: "Declaração de faturamento", sit: "" },
-  { seg: "FONTE RENDA", key: "DRE", sit: "" },
-  { seg: "FONTE RENDA", key: "Previsão de faturamento", sit: "" },
-  { seg: "FONTE RENDA", key: "SIMEI", sit: "" },
-  { seg: "FONTE RENDA", key: "Cálculo SIMEI", sit: "" },
-  { seg: "FONTE RENDA", key: "Tipo de renda PJ", sit: "" },
-  { seg: "PESSOA", key: "Naturalidade", sit: "" },
-  { seg: "PESSOA", key: "N° do documento", sit: "" },
-  { seg: "PESSOA", key: "Documento de identificação", sit: "" },
-  { seg: "PESSOA", key: "Filiação", sit: "" },
-  { seg: "PESSOA", key: "Tipo do documento", sit: "" },
-  { seg: "PESSOA", key: "Órgão expedidor", sit: "" },
-  { seg: "PESSOA", key: "UF do expedidor", sit: "" },
-  { seg: "PESSOA", key: "Data de emissão", sit: "" },
-  { seg: "PESSOA", key: "Data de nascimento", sit: "" },
-  { seg: "PESSOA", key: "Estado civil", sit: "" },
-  { seg: "PESSOA", key: "Ficha cadastral", sit: "" },
-  { seg: "PESSOA", key: "Capital social", sit: "" },
-  { seg: "PESSOA", key: "Inscrição estadual", sit: "" },
-  { seg: "PESSOA", key: "Inscrição municipal", sit: "" },
-  { seg: "PESSOA", key: "N° registro no órgão", sit: "" },
-  { seg: "PESSOA", key: "Data de registro", sit: "" },
-  { seg: "PESSOA", key: "N° última alteração", sit: "" },
-  { seg: "PESSOA", key: "N° de representação", sit: "" },
-  { seg: "RELACIONAMENTO", key: "Tipo de relacionamento", sit: "" },
-  { seg: "RELACIONAMENTO", key: "Percentual do capital", sit: "" },
-  { seg: "RELACIONAMENTO", key: "Data de início", sit: "" },
-  { seg: "RELACIONAMENTO", key: "Data fim", sit: "" },
-  { seg: "CERTIDÃO", key: "Tipo de certidão", sit: "" },
-  { seg: "CERTIDÃO", key: "Data de emissão", sit: "" },
-  { seg: "CERTIDÃO", key: "N° da certidão", sit: "" },
+  { seg: "FONTE RENDA", key: "Documento do simples", sit: "Pgdas/extrato" },
+  { seg: "FONTE RENDA", key: "Consulta simples", sit: "Consulta da receita federal" },
+  { seg: "FONTE RENDA", key: "Recibo simples", sit: "Recibo do pgdas" },
+  { seg: "FONTE RENDA", key: "Flag simples", sit: "Sim/Não" },
+  { seg: "FONTE RENDA", key: "Declaração de faturamento", sit: "Meses divergentes, valores" },
+  { seg: "FONTE RENDA", key: "DRE", sit: "Meses divergentes, valores" },
+  { seg: "FONTE RENDA", key: "Previsão de faturamento", sit: "Meses divergentes, valores" },
+  { seg: "FONTE RENDA", key: "SIMEI", sit: "Meses divergentes, valores" },
+  { seg: "FONTE RENDA", key: "Cálculo SIMEI", sit: "Valores" },
+  { seg: "FONTE RENDA", key: "Tipo de renda PJ", sit: "PJ" },
+
+  // PESSOA
+  { seg: "PESSOA", key: "Naturalidade", sit: "PF" },
+  { seg: "PESSOA", key: "N° do documento", sit: "PF" },
+  { seg: "PESSOA", key: "Documento de identificação", sit: "PF" },
+  { seg: "PESSOA", key: "Filiação", sit: "PF" },
+  { seg: "PESSOA", key: "Tipo do documento", sit: "PF" },
+  { seg: "PESSOA", key: "Órgão expedidor", sit: "PF" },
+  { seg: "PESSOA", key: "UF do expedidor", sit: "PF/PJ" },
+  { seg: "PESSOA", key: "Data de emissão", sit: "PF" },
+  { seg: "PESSOA", key: "Data de nascimento", sit: "PF" },
+  { seg: "PESSOA", key: "Estado civil", sit: "PF" },
+  { seg: "PESSOA", key: "Ficha cadastral", sit: "PF/PJ - assinaturas, falta do documento correto" },
+  { seg: "PESSOA", key: "Capital social", sit: "PJ" },
+  { seg: "PESSOA", key: "Inscrição estadual", sit: "PJ" },
+  { seg: "PESSOA", key: "Inscrição municipal", sit: "PJ" },
+  { seg: "PESSOA", key: "N° registro no órgão", sit: "PJ" },
+  { seg: "PESSOA", key: "Data de registro", sit: "PJ" },
+  { seg: "PESSOA", key: "N° última alteração", sit: "PJ" },
+  { seg: "PESSOA", key: "N° de representação", sit: "PJ" },
+
+  // RELACIONAMENTO
+  { seg: "RELACIONAMENTO", key: "Tipo de relacionamento", sit: "PF/PJ" },
+  { seg: "RELACIONAMENTO", key: "Percentual do capital", sit: "PF/PJ" },
+  { seg: "RELACIONAMENTO", key: "Data de início", sit: "PF/PJ" },
+  { seg: "RELACIONAMENTO", key: "Data fim", sit: "PF/PJ" },
+
+  // CERTIDÃO
+  { seg: "CERTIDÃO", key: "Tipo de certidão", sit: "PF/PJ" },
+  { seg: "CERTIDÃO", key: "Data de emissão", sit: "PF/PJ" },
+  { seg: "CERTIDÃO", key: "N° da certidão", sit: "PF/PJ" },
 ];
 
 const SEGMENT_ORDER = ["TODOS","ENDEREÇO","BEM NOVO","PRODUTOR","FONTE RENDA","PESSOA","RELACIONAMENTO","CERTIDÃO"];
@@ -417,6 +420,7 @@ function highlight(text, term) {
 function render() {
   const listEl = document.getElementById("list");
   const infoEl = document.getElementById("results-info");
+  const isSearching = searchTerm.length > 0;
 
   const filtered = DATA.filter(d => {
     const matchSeg = activeFilter==="TODOS_SEGS" || d.seg===activeFilter;
@@ -442,10 +446,13 @@ function render() {
   SEGMENT_ORDER.forEach(seg => {
     const items = groups[seg];
     if (!items.length) return;
+
     const g = document.createElement("div");
-    g.className = "group";
+    // Open automatically when searching, closed by default otherwise
+    g.className = "group" + (isSearching ? " open" : "");
+
     g.innerHTML = `
-      <div class="group-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <div class="group-header" onclick="this.parentElement.classList.toggle('open')">
         <div class="group-left">
           <div class="group-icon">${SEGMENT_ICONS[seg]||seg[0]}</div>
           <span class="group-name">${esc(seg)}</span>
@@ -468,6 +475,7 @@ function render() {
             </button>
           </div>`).join("")}
       </div>`;
+
     listEl.appendChild(g);
   });
 }
