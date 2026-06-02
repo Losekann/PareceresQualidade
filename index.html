@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pareceres de Inspeção – Meta</title>
-<link rel="icon" type="image/png" href="Meta-Logo-PNG-HD.png">
+<title>Pareceres de Inspeção – Insi</title>
+<link rel="icon" type="image/png" href="insi-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -137,7 +137,6 @@
   .results-info { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; }
   .results-info strong { color: var(--text); }
 
-  /* GROUP */
   .group {
     background: var(--surface);
     border-radius: 12px;
@@ -160,10 +159,7 @@
     border-bottom: 1px solid transparent;
   }
 
-  .group:not(.collapsed) .group-header {
-    border-bottom-color: var(--border);
-  }
-
+  .group:not(.collapsed) .group-header { border-bottom-color: var(--border); }
   .group-header:hover { filter: brightness(.97); }
   .group-left { display: flex; align-items: center; gap: 10px; }
 
@@ -191,14 +187,11 @@
   }
   .group-arrow { color: var(--text-dim); font-size: 11px; transition: transform .25s; }
 
-  /* COLLAPSED by default */
   .group-body { display: none; }
   .group-arrow { transform: rotate(-90deg); }
-
   .group.open .group-body { display: block; }
   .group.open .group-arrow { transform: rotate(0deg); }
 
-  /* ITEM */
   .item {
     display: flex;
     align-items: center;
@@ -244,7 +237,7 @@
 <body>
 
 <header>
-  <img src="Meta-Logo-PNG-HD2.png" alt="Meta Logo">
+  <img src="insi-logo.png" alt="Insi Logo">
   <div class="header-right">
     <div class="header-title-wrap">
       <div class="header-title">Pareceres de Inspeção</div>
@@ -333,6 +326,7 @@ const DATA = [
   { seg: "FONTE RENDA", key: "Consulta simples", sit: "Consulta da receita federal" },
   { seg: "FONTE RENDA", key: "Recibo simples", sit: "Recibo do pgdas" },
   { seg: "FONTE RENDA", key: "Flag simples", sit: "Sim/Não" },
+  { seg: "FONTE RENDA", key: "Consulta CRC", sit: "Consulta CRC, número" },
   { seg: "FONTE RENDA", key: "Declaração de faturamento", sit: "Meses divergentes, valores" },
   { seg: "FONTE RENDA", key: "DRE", sit: "Meses divergentes, valores" },
   { seg: "FONTE RENDA", key: "Previsão de faturamento", sit: "Meses divergentes, valores" },
@@ -352,6 +346,7 @@ const DATA = [
   { seg: "PESSOA", key: "Data de nascimento", sit: "PF" },
   { seg: "PESSOA", key: "Estado civil", sit: "PF" },
   { seg: "PESSOA", key: "Ficha cadastral", sit: "PF/PJ - assinaturas, falta do documento correto" },
+  { seg: "PESSOA", key: "Razão Social", sit: "PJ" },
   { seg: "PESSOA", key: "Capital social", sit: "PJ" },
   { seg: "PESSOA", key: "Inscrição estadual", sit: "PJ" },
   { seg: "PESSOA", key: "Inscrição municipal", sit: "PJ" },
@@ -381,7 +376,6 @@ const SEGMENT_ICONS = {
 let activeFilter = "TODOS_SEGS";
 let searchTerm = "";
 
-// Filters
 const filtersEl = document.getElementById("filters");
 [{label:"Todos os segmentos", val:"TODOS_SEGS"}, ...SEGMENT_ORDER.map(s=>({label:s,val:s}))].forEach(f => {
   const btn = document.createElement("button");
@@ -396,7 +390,6 @@ const filtersEl = document.getElementById("filters");
   filtersEl.appendChild(btn);
 });
 
-// Search
 const searchEl = document.getElementById("search");
 const clearBtn = document.getElementById("clear-btn");
 searchEl.addEventListener("input", () => {
@@ -448,7 +441,6 @@ function render() {
     if (!items.length) return;
 
     const g = document.createElement("div");
-    // Open automatically when searching, closed by default otherwise
     g.className = "group" + (isSearching ? " open" : "");
 
     g.innerHTML = `
